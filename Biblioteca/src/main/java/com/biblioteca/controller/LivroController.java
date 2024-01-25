@@ -2,10 +2,7 @@ package com.biblioteca.controller;
 
 import com.biblioteca.model.Livro;
 import com.biblioteca.service.LivroService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
 
@@ -22,5 +19,10 @@ public class LivroController {
     @GetMapping("/{id}")
     public Livro buscarLivro(@PathVariable UUID idLivro){
         return livroService.buscarLivro(idLivro);
+    }
+
+    @PutMapping("/{id}")
+    public Livro atualizarLivro(@PathVariable UUID idLivro, @RequestBody Livro novoLivro){
+        return livroService.atualizarLivro(idLivro, novoLivro);
     }
 }

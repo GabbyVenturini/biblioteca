@@ -21,4 +21,15 @@ public class LivroService {
             throw new ObjectNotFoundException(idLivro, Livro.class.getSimpleName());
         }
     }
+
+    public Livro atualizarLivro(UUID idLivro, Livro novoLivro) {
+        var atualizarLivro = livroRepository.findById(idLivro);
+        if(atualizarLivro.isPresent()){
+            var livro = atualizarLivro.get();
+            livro.setTitulo(novoLivro.getTitulo());
+            return livroRepository.save(livro);
+        }else{
+            throw new ObjectNotFoundException(idLivro, Livro.class.getSimpleName());
+        }
+    }
 }
