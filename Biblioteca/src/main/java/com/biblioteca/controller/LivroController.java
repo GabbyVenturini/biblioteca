@@ -3,8 +3,11 @@ package com.biblioteca.controller;
 import com.biblioteca.model.Livro;
 import com.biblioteca.service.LivroService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/v1/livros")
@@ -13,8 +16,15 @@ public class LivroController {
     private LivroService livroService;
 
     @PostMapping("/inserir")
-    public ResponseEntity<Livro> inserirLivro(@RequestBody Livro inserirLivro) {
-        return livroService.livro(inserirLivro);
+    public ResponseEntity inserirlivro(@RequestBody Livro Livro) {
+        livroService.inserirlivro(Livro);
+        return ResponseEntity.status(HttpStatus.CREATED).body("Livro registrado com sucesso");
 
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity deletarLivro(@PathVariable(value = "id") UUID idLivro) {
+        livroService.deletarLivro(idLivro);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).body("Livro deletado com sucesso");
     }
 }
