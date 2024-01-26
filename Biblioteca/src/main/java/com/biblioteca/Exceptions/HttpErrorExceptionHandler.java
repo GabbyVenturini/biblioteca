@@ -6,8 +6,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
-import java.time.LocalDateTime;
-
 @ControllerAdvice
 public class HttpErrorExceptionHandler {
 
@@ -23,11 +21,11 @@ public class HttpErrorExceptionHandler {
 
     @ExceptionHandler(ObjectNotFoundException.class)
     public ResponseEntity<ApiError> notFound(ObjectNotFoundException exception) {
-        return buildErrorResponse(HttpStatus.NOT_FOUND,"Nao foi possivel encontrar " + exception.getEntityName());
+        return buildErrorResponse(HttpStatus.NOT_FOUND, "Nao foi possivel encontrar " + exception.getEntityName());
     }
 
     private ResponseEntity<ApiError> buildErrorResponse(HttpStatus status, String message) {
-        var error = new ApiError(status.value(), message, LocalDateTime.now());
+        var error = new ApiError();
         return ResponseEntity.status(status).body(error);
     }
 }
