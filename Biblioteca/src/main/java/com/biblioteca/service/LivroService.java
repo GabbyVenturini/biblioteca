@@ -13,22 +13,23 @@ import java.util.UUID;
 public class LivroService {
 
     private LivroRepository livroRepository;
+
     public Livro buscarLivro(UUID idLivro) {
         var livro = livroRepository.findById(idLivro);
-        if(livro.isPresent()){
+        if (livro.isPresent()) {
             return livro.get();
-        }else{
+        } else {
             throw new ObjectNotFoundException(idLivro, Livro.class.getSimpleName());
         }
     }
 
     public Livro atualizarLivro(UUID idLivro, Livro novoLivro) {
         var atualizarLivro = livroRepository.findById(idLivro);
-        if(atualizarLivro.isPresent()){
+        if (atualizarLivro.isPresent()) {
             var livro = atualizarLivro.get();
             livro.setTitulo(novoLivro.getTitulo());
             return livroRepository.save(livro);
-        }else{
+        } else {
             throw new ObjectNotFoundException(idLivro, Livro.class.getSimpleName());
         }
     }

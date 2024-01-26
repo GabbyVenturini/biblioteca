@@ -9,7 +9,7 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/v1/livros")
 public class LivroController {
-    
+
     private LivroService livroService;
 
     public LivroController(LivroService livroService) {
@@ -17,12 +17,12 @@ public class LivroController {
     }
 
     @GetMapping("/{id}")
-    public Livro buscarLivro(@PathVariable UUID idLivro){
+    public Livro buscarLivro(@PathVariable UUID idLivro) {
         return livroService.buscarLivro(idLivro);
     }
 
     @PutMapping("/{id}")
-    public Livro atualizarLivro(@PathVariable UUID idLivro, @RequestBody Livro novoLivro){
+    public Livro atualizarLivro(@PathVariable UUID idLivro, @RequestBody Livro novoLivro) {
         return livroService.atualizarLivro(idLivro, novoLivro);
     }
 }
