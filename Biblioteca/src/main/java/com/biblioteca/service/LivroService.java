@@ -2,13 +2,12 @@ package com.biblioteca.service;
 
 import com.biblioteca.model.Livro;
 import com.biblioteca.repository.LivroRepository;
+import com.biblioteca.validation.Validator;
 import jakarta.transaction.Transactional;
-import org.apache.coyote.BadRequestException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Service
 public class LivroService {
@@ -16,15 +15,10 @@ public class LivroService {
     private LivroRepository livroRepository;
 
     @Transactional
-    public Livro inserirLivro(Livro inserirLivro) {
-        List<String> validarlivro = new ArrayList<>();
-        if (inserirLivro.titulo.isBlank() || inserirLivro.genero.isBlank() || inserirLivro.autor.isBlank() ||
-                inserirLivro.editora.isBlank() || inserirLivro.classificacao.isBlank()) {
-            throw new BadRequestException("Nenhum campo pode estar em branco");
-        }
-        if (livroRepository.existsByTitulo(inserirLivro.titulo)) {
-            throw new BadRequestException("Livro já cadastrado");
-        }
-        return livroRepository.save(inserirLivro);
+    public ResponseEntity livro(Livro livro) {
+        Validator.validarCampo(livro);
+        Validator.validarLivroExistente(livro);
+        livroRepository.save(livro);
+        return ResponseEntity.status(HttpStatus.CREATED).body("Livro registrado com sucesso!")
     }
 }
