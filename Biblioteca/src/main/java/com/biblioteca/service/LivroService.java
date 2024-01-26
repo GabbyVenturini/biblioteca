@@ -2,19 +2,19 @@ package com.biblioteca.service;
 
 import com.biblioteca.model.Livro;
 import com.biblioteca.repository.LivroRepository;
-import lombok.AllArgsConstructor;
 import org.hibernate.ObjectNotFoundException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
 
 @Service
-@AllArgsConstructor
 public class LivroService {
-
+    @Autowired
     private LivroRepository livroRepository;
 
-    public Livro buscarLivro(UUID idLivro) {
+    public ResponseEntity<Livro> buscarLivro(UUID idLivro) {
         var livro = livroRepository.findById(idLivro);
         if (livro.isPresent()) {
             return livro.get();
@@ -23,7 +23,7 @@ public class LivroService {
         }
     }
 
-    public Livro atualizarLivro(UUID idLivro, Livro novoLivro) {
+    public ResponseEntity<Livro> atualizarLivro(UUID idLivro, Livro novoLivro) {
         var atualizarLivro = livroRepository.findById(idLivro);
         if (atualizarLivro.isPresent()) {
             var livro = atualizarLivro.get();
