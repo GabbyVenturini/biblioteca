@@ -2,17 +2,21 @@ package com.biblioteca.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.Serializable;
 import java.util.UUID;
 
 @Entity
 @Table(name = "Livros")
-@Data
-@NoArgsConstructor
+@Getter
+@Setter
 public class Livro implements Serializable {
 
+    @Autowired
     private static final long serialVersionUUID = 1L;
 
     @Id

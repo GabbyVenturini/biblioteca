@@ -19,14 +19,26 @@ public class LivroController {
     public ResponseEntity inserirlivro(@RequestBody Livro Livro) {
         livroService.inserirlivro(Livro);
         return ResponseEntity
-            .status(HttpStatus.CREATED).body("Livro registrado com sucesso");
+                .status(HttpStatus.CREATED).body("Livro registrado com sucesso");
+    }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<String> buscarLivro(@PathVariable UUID idLivro) {
+        livroService.buscarLivro(idLivro);
+        return
+                ResponseEntity.status(HttpStatus.OK).body("Livro encontrado!");
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<String> atualizarLivro(@PathVariable UUID idLivro) {
+        livroService.atualizarLivro(idLivro);
+        return ResponseEntity.status(HttpStatus.OK).body("Livro atualizado!");
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity deletarLivro(@PathVariable UUID id) {
+    public ResponseEntity<String> deletarLivro(@PathVariable UUID id) {
         livroService.deletarLivro(id);
         return ResponseEntity
-            .status(HttpStatus.NO_CONTENT).body("Livro deletado com sucesso");
+                .status(HttpStatus.NO_CONTENT).body("Livro deletado com sucesso");
     }
 }
