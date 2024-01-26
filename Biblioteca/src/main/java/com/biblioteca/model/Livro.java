@@ -2,7 +2,6 @@ package com.biblioteca.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
@@ -18,7 +17,7 @@ public class Livro implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    public UUID idLivro;
+    private UUID id;
     @Column(nullable = false)
     public String titulo;
     @Column(nullable = false)
@@ -31,6 +30,4 @@ public class Livro implements Serializable {
     public String classificacao;
     @Column(nullable = false)
     public int quantidade;
-
-
 }
