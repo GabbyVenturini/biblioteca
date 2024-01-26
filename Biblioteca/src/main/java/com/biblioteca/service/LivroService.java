@@ -9,15 +9,15 @@ import org.springframework.stereotype.Service;
 
 import java.util.UUID;
 
+import static com.biblioteca.validation.LivroValidator.existePorId;
 import static com.biblioteca.validation.LivroValidator.existePorTitulo;
 import static com.biblioteca.validation.LivroValidator.validarCamposEmBranco;
 
 @Service
 public class LivroService {
+
     @Autowired
     private LivroRepository livroRepository;
-    @Autowired
-    private LivroValidator livroValidator;
 
     @Transactional
     public void inserirlivro(Livro livro) {
@@ -28,8 +28,8 @@ public class LivroService {
     }
 
     @Transactional
-    public void deletarLivro(UUID idLivro) {
-        var livro = LivroValidator.existePorId(idLivro);
+    public void deletarLivro(UUID id) {
+        var livro = existePorId(id);
         livroRepository.delete(livro);
     }
 }

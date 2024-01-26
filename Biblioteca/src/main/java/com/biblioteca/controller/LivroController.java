@@ -18,13 +18,15 @@ public class LivroController {
     @PostMapping("/inserir")
     public ResponseEntity inserirlivro(@RequestBody Livro Livro) {
         livroService.inserirlivro(Livro);
-        return ResponseEntity.status(HttpStatus.CREATED).body("Livro registrado com sucesso");
+        return ResponseEntity
+            .status(HttpStatus.CREATED).body("Livro registrado com sucesso");
 
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity deletarLivro(@PathVariable(value = "id") UUID idLivro) {
-        livroService.deletarLivro(idLivro);
-        return ResponseEntity.status(HttpStatus.NO_CONTENT).body("Livro deletado com sucesso");
+    public ResponseEntity deletarLivro(@PathVariable UUID id) {
+        livroService.deletarLivro(id);
+        return ResponseEntity
+            .status(HttpStatus.NO_CONTENT).body("Livro deletado com sucesso");
     }
 }
