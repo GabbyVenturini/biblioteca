@@ -3,7 +3,6 @@ package com.biblioteca.validation;
 import com.biblioteca.model.Livro;
 import com.biblioteca.repository.LivroRepository;
 
-import org.apache.coyote.BadRequestException;
 import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -16,11 +15,9 @@ public class LivroValidator {
     private static LivroRepository livroRepository;
 
     public static void validarCamposEmBranco(Livro livro) {
-        if (livro.titulo.isBlank() || livro.genero.isBlank() || livro.autor.isBlank() ||
-                livro.editora.isBlank() || livro.classificacao.isBlank()) {
+        if (livro.titulo.isBlank() || livro.genero.isBlank() || livro.autor.isBlank() || livro.editora.isBlank() || livro.classificacao.isBlank()) {
             throw new RuntimeException("Nenhum campo pode estar em branco");
         }
-
     }
 
     public static void existePorTitulo(Livro livro) {
@@ -37,6 +34,5 @@ public class LivroValidator {
         } else {
             return livroPorId.get();
         }
-
     }
 }
