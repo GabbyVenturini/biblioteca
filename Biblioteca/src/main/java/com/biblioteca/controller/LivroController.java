@@ -36,9 +36,8 @@ public class LivroController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deletarLivro(@PathVariable UUID id) {
+    public ResponseEntity deletarLivro(@PathVariable UUID id) {
         livroService.deletarLivro(id);
-        return ResponseEntity
-                .status(HttpStatus.NO_CONTENT).body("Livro deletado com sucesso");
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 }

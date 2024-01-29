@@ -14,7 +14,7 @@ import java.util.UUID;
 @Table(name = "Livros")
 @Getter
 @Setter
-public class Livro implements Serializable {
+public class   Livro implements Serializable {
 
     @Autowired
     private static final long serialVersionUUID = 1L;
