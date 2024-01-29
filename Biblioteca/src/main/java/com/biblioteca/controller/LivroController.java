@@ -16,27 +16,27 @@ public class LivroController {
     private LivroService livroService;
 
     @PostMapping("/inserir")
-    public ResponseEntity inserirlivro(@RequestBody Livro Livro) {
-        livroService.inserirlivro(Livro);
+    public ResponseEntity inserirlivro(@RequestBody Livro livro) {
+       var livroResponse = livroService.inserirlivro(livro);
         return ResponseEntity
-                .status(HttpStatus.CREATED).body("Livro registrado com sucesso");
+                .status(HttpStatus.CREATED).body(livroResponse);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<String> buscarLivro(@PathVariable UUID idLivro) {
-        livroService.buscarLivro(idLivro);
+    public ResponseEntity buscarLivro(@PathVariable UUID id) {
+        var livroResponse = livroService.buscarLivro(id);
         return
-                ResponseEntity.status(HttpStatus.OK).body("Livro encontrado!");
+                ResponseEntity.status(HttpStatus.OK).body(livroResponse);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<String> atualizarLivro(@PathVariable UUID idLivro) {
-        livroService.atualizarLivro(idLivro);
+    public ResponseEntity atualizarLivro(@PathVariable UUID id, @RequestBody Livro novoLivro) {
+        livroService.atualizarLivro(novoLivro);
         return ResponseEntity.status(HttpStatus.OK).body("Livro atualizado!");
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deletarLivro(@PathVariable UUID id) {
+    public ResponseEntity deletarLivro(@PathVariable UUID id) {
         livroService.deletarLivro(id);
         return ResponseEntity
                 .status(HttpStatus.NO_CONTENT).body("Livro deletado com sucesso");
