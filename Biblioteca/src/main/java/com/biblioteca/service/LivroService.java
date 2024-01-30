@@ -46,14 +46,14 @@ public class LivroService {
         var livroResponse = livroRepository.findById(id);
 
         if (livroResponse.isPresent()) {
-            var existingLivro = livroResponse.get();
+            var livroExistente = livroResponse.get();
 
-            existingLivro.setTitulo(livro.getTitulo());
-            existingLivro.setAutor(livro.getAutor());
+            livroExistente.setTitulo(livro.getTitulo());
+            livroExistente.setAutor(livro.getAutor());
 
-            livroRepository.save(existingLivro);
+            livroRepository.save(livroExistente);
 
-            return existingLivro;
+            return livroExistente;
         } else {
             throw new ObjectNotFoundException(id, Livro.class.getSimpleName());
         }
