@@ -5,30 +5,32 @@ import com.biblioteca.repository.LivroRepository;
 
 import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 import java.util.UUID;
 
+@Service
 public class LivroValidator {
 
     @Autowired
-    private static LivroRepository livroRepository;
+    private LivroRepository livroRepository;
 
-    public static void validarCamposEmBranco(Livro livro) {
+    public void validarCamposEmBranco(Livro livro) {
         if (livro.titulo.isBlank() || livro.genero.isBlank() || livro.autor.isBlank() || livro.editora.isBlank() || livro.classificacao.isBlank()) {
             throw new RuntimeException("Nenhum campo pode estar em branco");
         }
     }
 
-    public static void existePorTitulo(Livro livro) {
+    public void existePorTitulo(Livro livro) {
         if (livroRepository.existsByTitulo(livro.titulo)) {
             throw new RuntimeException("Livro já cadastrado");
         }
     }
 
-    public static Livro existePorId(UUID idLivro) {
+    public Livro existePorId(UUID idLivro) {
         LivroRepository livroRepository = null;
-        Optional<Livro> livroPorId = livroRepository.findByid(idLivro);
+        Optional<Livro> livroPorId = livroRepository.findById(idLivro);
         if (!livroPorId.isPresent()) {
             throw new ObjectNotFoundException(idLivro, Livro.class.getSimpleName());
         } else {
