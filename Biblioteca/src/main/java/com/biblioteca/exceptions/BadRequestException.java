@@ -1,4 +1,4 @@
-package com.biblioteca.Exceptions;
+package com.biblioteca.exceptions;
 
 public class BadRequestException extends RuntimeException{
     public BadRequestException(String message){

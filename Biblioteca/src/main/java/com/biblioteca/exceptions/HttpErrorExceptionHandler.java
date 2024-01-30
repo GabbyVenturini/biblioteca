@@ -1,4 +1,4 @@
-package com.biblioteca.Exceptions;
+package com.biblioteca.exceptions;
 
 import org.apache.coyote.BadRequestException;
 import org.hibernate.ObjectNotFoundException;
