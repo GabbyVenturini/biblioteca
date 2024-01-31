@@ -1,4 +1,4 @@
-package com.biblioteca.Exceptions;
+package com.biblioteca.exceptions;
 
 public class ForbiddenException extends RuntimeException {
     public ForbiddenException(String message) {
